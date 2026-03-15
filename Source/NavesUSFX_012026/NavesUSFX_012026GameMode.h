@@ -13,6 +13,10 @@ class ANavesUSFX_012026GameMode : public AGameModeBase
 
 public:
 	ANavesUSFX_012026GameMode();
+
+public:
+	virtual void BeginPlay() override;
+	virtual void Tick(float DeltaTime) override;
 };
 
 
