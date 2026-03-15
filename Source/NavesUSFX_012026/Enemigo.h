@@ -24,14 +24,6 @@ public:
 	FVector WorldLimitesMin = FVector(-1800, -1800, 0);
 	FVector WorldLimitesMax = FVector(1800, 1800, 0);
 
-private:
-	TArray<FVector> PuntosRuta;
-
-	int32 IndicePuntoRutaActual = 0;
-
-	FVector PosicionInicial;
-	float Tolerancia = 50.0f;
-
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -39,6 +31,12 @@ protected:
 	void GenerarPuntosRuta();
 
 	virtual void MoverEnemigo(float DeltaTime);
+
+	TArray<FVector> PuntosRuta;
+
+	int32 IndicePuntoRutaActual = 0;
+	FVector PosicionInicial;
+	float Tolerancia = 50.0f;
 
 public:	
 	// Called every frame

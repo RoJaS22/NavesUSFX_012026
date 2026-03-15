@@ -59,13 +59,7 @@ void AEnemigo::MoverEnemigo(float DeltaTime)
 
         if (Distancia <= Tolerancia)
         {
-            // Waypoint alcanzado, siguiente
-            IndicePuntoRutaActual++;
-            if (IndicePuntoRutaActual >= PuntosRuta.Num())
-            {
-                // Volver al inicio
-                IndicePuntoRutaActual = 0;
-            }
+            IndicePuntoRutaActual = (IndicePuntoRutaActual + 1) % PuntosRuta.Num();
         }
         else
         {
