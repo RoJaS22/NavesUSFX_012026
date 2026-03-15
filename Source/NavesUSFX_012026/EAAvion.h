@@ -3,31 +3,27 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Enemigo.h"
-#include "EnemigoAereo.generated.h"
+#include "EnemigoAereo.h"
+#include "EAAvion.generated.h"
 
 /**
- *
+ * 
  */
 UCLASS()
-class NAVESUSFX_012026_API AEnemigoAereo : public AEnemigo
+class NAVESUSFX_012026_API AEAAvion : public AEnemigoAereo
 {
 	GENERATED_BODY()
-	
-public:	
+
+public:
 	// Sets default values for this actor's properties
-	AEnemigoAereo();
+	AEAAvion();
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	void MoverEnemigo(float DeltaTime) override;
-
-	float TiempoAcumulado;
-
-public:	
+public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
+	
 };
