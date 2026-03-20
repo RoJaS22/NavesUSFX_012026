@@ -24,6 +24,12 @@ public:
 	FVector WorldLimitesMin = FVector(-1800, -1800, 0);
 	FVector WorldLimitesMax = FVector(1800, 1800, 0);
 
+	// Bandera para cambiar de estado
+	bool bEnFormacion = false;
+
+	// El punto en el espacio al que debe volar cuando el Comandante se lo ordene
+	FVector PosicionFormacion;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -36,7 +42,7 @@ protected:
 
 	int32 IndicePuntoRutaActual = 0;
 	FVector PosicionInicial;
-	float Tolerancia = 50.0f;
+	float Tolerancia = 5.0f;
 
 public:	
 	// Called every frame

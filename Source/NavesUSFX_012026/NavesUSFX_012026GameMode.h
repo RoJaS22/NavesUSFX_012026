@@ -7,6 +7,7 @@
 #include "NavesUSFX_012026GameMode.generated.h"
 
 class AEnemigo;
+class APawn;
 
 UCLASS(MinimalAPI)
 class ANavesUSFX_012026GameMode : public AGameModeBase
@@ -19,6 +20,11 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
+	// Contenedor para almacenar a los enemigos 
+	TArray<AEnemigo*> ContenedorNaves;
+
+	void GenerarNaves();
+
 	// 1. Arreglos para almacenar a los miembros de cada cuadrilla
 	TArray<AEnemigo*> Cuadrilla1;
 	TArray<AEnemigo*> Cuadrilla2;
@@ -30,6 +36,16 @@ protected:
 	void SpawnearCuadrilla1();
 	void DesaparecerCuadrilla1();
 	void SpawnearCuadrilla2();
+
+	// Dos cronómetros: uno para formar, otro para romper filas
+	FTimerHandle TimerFormacion;
+	FTimerHandle TimerRetorno;
+
+	float IntervaloFormacion = 5.0f;
+	float EspaciadoVertical = 100.0f;
+
+	void OrdenarFormacion();
+	void OrdenarMovimientoLibre();
 
 public:
 	virtual void Tick(float DeltaTime) override;
