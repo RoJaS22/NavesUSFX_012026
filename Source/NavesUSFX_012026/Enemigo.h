@@ -24,11 +24,15 @@ public:
 	FVector WorldLimitesMin = FVector(-1800, -1800, 0);
 	FVector WorldLimitesMax = FVector(1800, 1800, 0);
 
-	// Bandera para cambiar de estado
 	bool bEnFormacion = false;
 
-	// El punto en el espacio al que debe volar cuando el Comandante se lo ordene
 	FVector PosicionFormacion;
+
+	float TiempoTransicionAcumulado;
+
+	FVector PosicionFormacionOriginal;
+
+	FVector CentroFormacion;
 
 protected:
 	// Called when the game starts or when spawned

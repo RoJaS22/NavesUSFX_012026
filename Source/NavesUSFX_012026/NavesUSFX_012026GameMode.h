@@ -25,19 +25,15 @@ protected:
 
 	void GenerarNaves();
 
-	// 1. Arreglos para almacenar a los miembros de cada cuadrilla
 	TArray<AEnemigo*> Cuadrilla1;
 	TArray<AEnemigo*> Cuadrilla2;
 
-	// 2. El objeto temporizador exigido para controlar la desaparición
 	FTimerHandle TimerDesaparicion;
 
-	// 3. Funciones de control de oleadas
 	void SpawnearCuadrilla1();
 	void DesaparecerCuadrilla1();
 	void SpawnearCuadrilla2();
 
-	// Dos cronómetros: uno para formar, otro para romper filas
 	FTimerHandle TimerFormacion;
 	FTimerHandle TimerRetorno;
 
