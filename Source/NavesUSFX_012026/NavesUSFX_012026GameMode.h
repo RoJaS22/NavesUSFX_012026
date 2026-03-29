@@ -4,10 +4,12 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
+#include "Lista.h"
 #include "NavesUSFX_012026GameMode.generated.h"
 
 class AEnemigo;
 class APawn;
+class ABloque;
 
 UCLASS(MinimalAPI)
 class ANavesUSFX_012026GameMode : public AGameModeBase
@@ -42,6 +44,9 @@ protected:
 
 	void OrdenarFormacion();
 	void OrdenarMovimientoLibre();
+
+	Lista<ABloque*> ListaBloques;
+	void GenerarCamino();
 
 public:
 	virtual void Tick(float DeltaTime) override;

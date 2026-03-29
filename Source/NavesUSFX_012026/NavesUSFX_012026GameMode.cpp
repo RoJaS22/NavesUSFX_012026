@@ -15,6 +15,7 @@
 #include "ETCamion.h"
 #include "ETTanque.h"
 #include "ETSoldado.h"
+#include "Bloque.h"
 #include "Engine/World.h"
 #include "TimerManager.h"
 #include "Kismet/GameplayStatics.h"
@@ -30,11 +31,16 @@ void ANavesUSFX_012026GameMode::BeginPlay()
 {
     Super::BeginPlay();
     
-   GenerarNaves();
+	GenerarCamino();
+
+
+	// Spawneo de las naves enemigas Laboratorio 3
+    /*
+    GenerarNaves();
 
     // Cronómetro 1: A los 5 segundos, se llama a la formación
-   GetWorld()->GetTimerManager().SetTimer(TimerFormacion, this, &ANavesUSFX_012026GameMode::OrdenarFormacion, IntervaloFormacion, false);
-
+    GetWorld()->GetTimerManager().SetTimer(TimerFormacion, this, &ANavesUSFX_012026GameMode::OrdenarFormacion, IntervaloFormacion, false);
+    */
 
 
     // Configuracion del spawn de las cuadrillas del laboratorio 2
@@ -246,6 +252,30 @@ void ANavesUSFX_012026GameMode::OrdenarMovimientoLibre()
         {
             Nave->bEnFormacion = false;
         }
+    }
+}
+
+void ANavesUSFX_012026GameMode::GenerarCamino()
+{
+	UWorld* World = GetWorld();
+	if (!World) return;
+
+	const int32 Filas = 7;
+	const int32 Columnas = 6;
+	const float Espaciado = 600.0f;
+
+    float OffsetX = (Filas * Espaciado) / 2.0f;
+    float OffsetY = (Columnas * Espaciado) / 2.0f;
+
+    for (int32 i = 0; i < Filas; i++) {
+        for(int32 j = 0; j < Columnas; j++) {
+            FVector PosicionSpawn = FVector(i * Espaciado - OffsetX + 350, j * Espaciado - OffsetY + 300, 160.0f);
+            FRotator RotacionSpawn = FRotator::ZeroRotator;
+            ABloque* NuevoBloque = World->SpawnActor<ABloque>(PosicionSpawn, RotacionSpawn);
+            if (NuevoBloque) {
+                ListaBloques.Agregar(NuevoBloque);
+            }
+		}
     }
 }
 
