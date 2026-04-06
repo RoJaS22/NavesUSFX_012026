@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
 #include "Lista.h"
+#include "Bloque.h"
 #include "NavesUSFX_012026GameMode.generated.h"
 
 class AEnemigo;
@@ -47,6 +48,9 @@ protected:
 
 	Lista<ABloque*> ListaBloques;
 	void GenerarCamino();
+
+	TArray<AActor*> ContenedorMuros;
+	void GenerarMapaMuros();
 
 public:
 	virtual void Tick(float DeltaTime) override;

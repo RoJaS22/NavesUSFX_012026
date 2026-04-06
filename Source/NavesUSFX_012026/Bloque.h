@@ -19,6 +19,10 @@ public:
 
 	UStaticMeshComponent* Malla;
 
+	float LargoX = 1.0f;
+	float AnchoY = 4.0f;
+	float AltoZ = 2.0f;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

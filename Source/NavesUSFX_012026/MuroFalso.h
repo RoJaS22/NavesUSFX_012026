@@ -3,28 +3,26 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Enemigo.h"
-#include "EnemigoTerrestre.generated.h"
+#include "Bloque.h"
+#include "MuroFalso.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class NAVESUSFX_012026_API AEnemigoTerrestre : public AEnemigo
+class NAVESUSFX_012026_API AMuroFalso : public ABloque
 {
 	GENERATED_BODY()
 
 public:
 	// Sets default values for this actor's properties
-	AEnemigoTerrestre();
+	AMuroFalso();
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	virtual void MoverEnemigo(float DeltaTime) override;
 
-	float TiempoAcumulado = 0.0f;
 
 public:
 	// Called every frame

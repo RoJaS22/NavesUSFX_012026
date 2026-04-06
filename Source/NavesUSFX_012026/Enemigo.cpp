@@ -49,49 +49,6 @@ void AEnemigo::GenerarPuntosRuta()
 	}
 }
 
-/*void AEnemigo::MoverEnemigo(float DeltaTime)
-{
-    if (bEnFormacion)
-    {
-        FVector UbicacionActual = GetActorLocation();
-
-        float Distancia = FVector::Dist(UbicacionActual, PosicionFormacion);
-
-        if (Distancia <= Tolerancia)
-        {
-            // Waypoint alcanzado, siguiente
-            return;
-        }
-        else
-        {
-            // Mover en línea recta
-            FVector Direccion = (PosicionFormacion - UbicacionActual).GetSafeNormal();
-            FVector NuevaUbicacion = UbicacionActual + (Direccion * VelocidadMovimiento * DeltaTime);
-            SetActorLocation(NuevaUbicacion);
-        }
-    }
-
-    else if (PuntosRuta.Num() > 1)
-    {
-        FVector UbicacionActual = GetActorLocation();
-        FVector UbicacionDestino = PuntosRuta[IndicePuntoRutaActual];
-
-        float Distancia = FVector::Dist(UbicacionActual, UbicacionDestino);
-
-        if (Distancia <= Tolerancia)
-        {
-            IndicePuntoRutaActual = (IndicePuntoRutaActual + 1) % PuntosRuta.Num();
-        }
-        else
-        {
-            // Mover en línea recta
-            FVector Direccion = (UbicacionDestino - UbicacionActual).GetSafeNormal();
-            FVector NuevaUbicacion = UbicacionActual + (Direccion * VelocidadMovimiento * DeltaTime);
-            SetActorLocation(NuevaUbicacion);
-        }
-    }
-}*/
-
 void AEnemigo::MoverEnemigo(float DeltaTime)
 {
     if (bEnFormacion)

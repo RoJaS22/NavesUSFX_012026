@@ -3,28 +3,33 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Enemigo.h"
-#include "EnemigoTerrestre.generated.h"
+#include "Bloque.h"
+#include "MuroMovedizo.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class NAVESUSFX_012026_API AEnemigoTerrestre : public AEnemigo
+class NAVESUSFX_012026_API AMuroMovedizo : public ABloque
 {
 	GENERATED_BODY()
 
 public:
 	// Sets default values for this actor's properties
-	AEnemigoTerrestre();
+	AMuroMovedizo();	
+
+	float Velocidad = 200.0f;
+	float Distancia = 400.0f;
+
+	FVector UbicacionInicial;
+
+	bool bMoverAdelante = true; 
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	virtual void MoverEnemigo(float DeltaTime) override;
-
-	float TiempoAcumulado = 0.0f;
+	void MoverMuro(float DeltaTime);
 
 public:
 	// Called every frame

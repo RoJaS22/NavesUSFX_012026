@@ -7,7 +7,7 @@
 ABloque::ABloque()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 
 	Malla = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Malla"));
 	RootComponent = Malla;
@@ -28,7 +28,7 @@ void ABloque::BeginPlay()
 
 	if (Malla)
 	{
-		Malla->SetRelativeScale3D(FVector(2.0f, 4.0f, 2.0f));
+		Malla->SetRelativeScale3D(FVector(LargoX, AnchoY, AltoZ));
 	}
 	
 }
