@@ -6,6 +6,7 @@
 #include "GameFramework/GameModeBase.h"
 #include "Lista.h"
 #include "Bloque.h"
+#include "GeneradorCamino.h"
 #include "NavesUSFX_012026GameMode.generated.h"
 
 class AEnemigo;
@@ -25,6 +26,8 @@ protected:
 
 	// Contenedor para almacenar a los enemigos 
 	TArray<AEnemigo*> ContenedorNaves;
+
+	UGeneradorCamino* GestorDelNivel;
 
 	void GenerarNaves();
 
@@ -49,8 +52,20 @@ protected:
 	Lista<ABloque*> ListaBloques;
 	void GenerarCamino();
 
-	TArray<AActor*> ContenedorMuros;
+	TArray<ABloque*> ContenedorMurosCuadrante1;
+	TArray<ABloque*> ContenedorMurosCuadrante2;
+	TArray<ABloque*> ContenedorMurosCuadrante3;
+	TArray<ABloque*> ContenedorMurosCuadrante4;
+
+	
+
 	void GenerarMapaMuros();
+
+	void MoverCuadrante(TArray<ABloque*> Contenedor);
+
+	void MoverCuadrante2(TArray<ABloque*> Contenedor);
+
+	TArray<AActor*> Contenedor9;
 
 public:
 	virtual void Tick(float DeltaTime) override;

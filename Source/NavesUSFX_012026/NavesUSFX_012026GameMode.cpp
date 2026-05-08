@@ -33,8 +33,49 @@ ANavesUSFX_012026GameMode::ANavesUSFX_012026GameMode()
 void ANavesUSFX_012026GameMode::BeginPlay()
 {
     Super::BeginPlay();
+
+    // laboratorio 5
+    GestorDelNivel = NewObject<UGeneradorCamino>(this);
+
+    if (GestorDelNivel)
+    {
+        GestorDelNivel->ConstruirCamino(GetWorld());
+    }
     
-    GenerarMapaMuros();
+
+    /*
+    MoverCuadrante(ContenedorMurosCuadrante1);
+    MoverCuadrante(ContenedorMurosCuadrante2);
+
+    MoverCuadrante2(ContenedorMurosCuadrante4);
+    MoverCuadrante2(ContenedorMurosCuadrante3);
+    */
+
+    /*
+    for (int32 i = 0; i < 3; i++) {
+        UWorld* World = GetWorld();
+        if (!World) return;
+
+        FVector Posicion = FVector(i * 100, i * 100, 160);
+        FRotator Rotacion = FRotator::ZeroRotator;
+
+        AActor* NuevoEnemigo = nullptr;
+
+        if (i == 0) {
+            NuevoEnemigo = World->SpawnActor<AEnemigo>(AEnemigo::StaticClass(), Posicion, Rotacion);
+        }
+        else if (i == 1) {
+            NuevoEnemigo = World->SpawnActor<AEnemigoAereo>(AEnemigoAereo::StaticClass(), Posicion * FVector(1.0f, 1.0f, 2.5f), Rotacion);
+        }
+        else if (i == 2) {
+            NuevoEnemigo = World->SpawnActor<AEnemigoTerrestre>(AEnemigoTerrestre::StaticClass(), Posicion, Rotacion);
+        }
+
+        if (NuevoEnemigo) {
+            Contenedor9.Add(NuevoEnemigo);
+        }
+    }
+    */
 
 
 	// Generar el camino para el laboratorio 4
@@ -286,73 +327,35 @@ void ANavesUSFX_012026GameMode::GenerarCamino()
     }
 }
 
-void ANavesUSFX_012026GameMode::GenerarMapaMuros()
+void ANavesUSFX_012026GameMode::MoverCuadrante(TArray<ABloque*> Contenedor)
 {
-    UWorld* World = GetWorld();
-    if (!World) return;
-
-    //MAPA 
-    TArray<int32> PlanoNivel = {
-		2, 2, 1, 0, 1, 1, 0, 1,
-        0, 0, 3, 0, 3, 2, 1, 0,
-        0, 1, 2, 0, 1, 3, 2, 0,
-        2, 0, 6, 0, 1, 4, 1, 0,
-        0, 3, 2, 2, 2, 1, 3, 0,
-        2, 0, 3, 5, 3, 0, 1, 0,
-        0, 3, 1, 0, 1, 2, 1, 1,
-        2, 0, 0, 0, 0, 0, 0, 0
-    };
-
-    const int32 Filas = 8;
-    const int32 Columnas = 8;
-    const float AnchoMuro = 400.0f;
-
-    for (int32 y = 0; y < Filas; y++)
-    {
-        for (int32 x = 0; x < Columnas; x++)
+        for (int32 i = 0; i < Contenedor.Num(); i++)
         {
-            int32 Indice = x + (y * Columnas);
-            int32 TipoDeCelda = PlanoNivel[Indice];
-
-            if (TipoDeCelda == 0) continue;
-
-            FVector PosicionMuro = FVector(x * AnchoMuro - 1000, y * AnchoMuro - 1500, 160.0f);
-            FRotator RotacionMuro = FRotator::ZeroRotator;
-
-			FVector PosicionAereo = FVector(1.0f, 1.0f, 2.5f);
-			FRotator RotacionAdicional = FRotator(0.0f, 90.0f, 0.0f);
-
-            AActor* NuevoMuroSpawneado = nullptr;
-
-            switch (TipoDeCelda)
+            FVector Desplazamiento = FVector(0.0f, -1000.f, 0.0f);
+           
+            if (Contenedor[i] != nullptr)
             {
-                case 1:
-                    NuevoMuroSpawneado = World->SpawnActor<AMuroMagico>(AMuroMagico::StaticClass(), PosicionMuro, RotacionMuro);
-					break;
-				case 2: 
-                    NuevoMuroSpawneado = World->SpawnActor<AMuroFalso>(AMuroFalso::StaticClass(), PosicionMuro, RotacionMuro);
-					break;
-				case 3: 
-                    NuevoMuroSpawneado = World->SpawnActor<AMuroMovedizo>(AMuroMovedizo::StaticClass(), PosicionMuro, RotacionMuro);
-					break;
-				case 4:
-                    NuevoMuroSpawneado = World->SpawnActor<AEnemigo>(AEnemigo::StaticClass(), PosicionMuro, RotacionMuro);
-                    break;
-				case 5:
-                    NuevoMuroSpawneado = World->SpawnActor<AEnemigoTerrestre>(AEnemigoTerrestre::StaticClass(), PosicionMuro, RotacionMuro);
-					break;
-				case 6:
-					NuevoMuroSpawneado = World->SpawnActor<AEnemigoAereo>(AEnemigoAereo::StaticClass(), PosicionMuro*PosicionAereo, RotacionMuro);
-					break;
-                default:
-                    break;
+                FVector PosicionActual = Contenedor[i]->GetActorLocation();
+
+                
+                Contenedor[i]->SetActorLocation(PosicionActual + Desplazamiento);
             }
-            
-            // 4. ALMACENAMIENTO
-            if (NuevoMuroSpawneado)
-            {
-                ContenedorMuros.Add(NuevoMuroSpawneado);
-            }
+        }
+    
+}
+
+void ANavesUSFX_012026GameMode::MoverCuadrante2(TArray<ABloque*> Contenedor)
+{
+    for (int32 i = 0; i < Contenedor.Num(); i++)
+    {
+        FVector Desplazamiento = FVector(0.0f, 1000.f, 0.0f);
+
+        if (Contenedor[i] != nullptr)
+        {
+            FVector PosicionActual = Contenedor[i]->GetActorLocation();
+
+
+            Contenedor[i]->SetActorLocation(PosicionActual + Desplazamiento);
         }
     }
 }
